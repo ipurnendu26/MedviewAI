@@ -1,0 +1,29 @@
+services:
+  # 1. Streamlit Dashboard 
+  dashboard:
+    build:
+      context: .
+      dockerfile: docker/dashboard.Dockerfile
+    ports:
+      - "8501:8501"
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/medview
+    depends_on:
+      - db
+    volumes:
+      - ./models:/app/models
+
+  # 2. The Database (PostgreSQL — audit log + inference records)
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: medview
+    ports:
+      - "5433:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+volumes:
+  pg_data:

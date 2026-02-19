@@ -1,0 +1,15 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data/
+.env
+*.egg-info/
+.git/
+models/*.onnx
+models/*_savedmodel/
+models/*.csv
+models/eff_phase1_best.keras
+models/eff_phase2_best.keras
+models/vit_best.keras
